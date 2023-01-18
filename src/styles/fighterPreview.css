@@ -1,0 +1,97 @@
+.fighter-preview___root {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 250px;
+  font-size: 30px;
+  font-family: 'Arial';
+}
+
+.fighter-preview___right {
+  align-items: flex-end;
+}
+
+.fighter-preview___left {
+  align-items: flex-start;
+}
+
+.fighter-preview__name {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(233, 236, 239, 0.5);
+  margin-bottom: 20px;
+}
+
+.fighter-preview__image {
+  height: 400px;
+  width: 300px;
+}
+
+.fighter-preview___right .fighter-preview__image {
+  transform: scale(-1, 1);
+}
+
+.fighter-preview__image img {
+  height: 100%;
+}
+
+.fighter-preview__details {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.fighter-preview__detail {
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 20px;
+  background-color: #d5dbdb;
+  border: 4px solid black;
+}
+
+.fighter-preview__detail .fighter-preview__progress{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 10%;
+  background-color: #000000;
+}
+
+.fighter-preview__health .fighter-preview__progress {
+  background-color: #ba0303;
+}
+
+.fighter-preview__attack .fighter-preview__progress {
+  background-color: #15a6ea;
+}
+
+.fighter-preview__defence .fighter-preview__progress {
+  background-color: #f5ea27;
+}
+
+.fighter-preview___right .fighter-preview__detail .fighter-preview__progress{
+  right: 0;
+}
+
+.fighter-preview___left .fighter-preview__detail .fighter-preview__progress{
+  left: 0;
+}
+
+.fighter-preview__detail:last-child {
+  margin-bottom: 0;
+}
+
+.fighter-preview__detail-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #d5dbdb;
+}
+
+.fighter-preview___right .fighter-preview__detail-title {
+  text-align: right;
+}
+
+
+
