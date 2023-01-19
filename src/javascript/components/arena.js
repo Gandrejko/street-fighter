@@ -16,35 +16,38 @@ export function renderArena(selectedFighters) {
 
 function createArena(selectedFighters) {
   const arena = createElement({ tagName: 'div', className: 'arena___root' });
-  const healthIndicators = createHealthIndicators(...selectedFighters);
+  const healthIndicators = createIndicators(...selectedFighters);
   const fighters = createFighters(...selectedFighters);
 
   arena.append(healthIndicators, fighters);
   return arena;
 }
 
-function createHealthIndicators(leftFighter, rightFighter) {
+function createIndicators(leftFighter, rightFighter) {
   const healthIndicators = createElement({ tagName: 'div', className: 'arena___fight-status' });
   const versusSign = createElement({ tagName: 'div', className: 'arena___versus-sign' });
-  const leftFighterIndicator = createHealthIndicator(leftFighter, 'left');
-  const rightFighterIndicator = createHealthIndicator(rightFighter, 'right');
+  const leftFighterIndicator = createIndicator(leftFighter, 'left');
+  const rightFighterIndicator = createIndicator(rightFighter, 'right');
 
   healthIndicators.append(leftFighterIndicator, versusSign, rightFighterIndicator);
   return healthIndicators;
 }
 
-function createHealthIndicator(fighter, position) {
+function createIndicator(fighter, position) {
   const { name } = fighter;
   const container = createElement({ tagName: 'div', className: 'arena___fighter-indicator' });
   const fighterName = createElement({ tagName: 'span', className: 'arena___fighter-name' });
   const indicator = createElement({ tagName: 'div', className: 'arena___health-indicator' });
-  const bar = createElement({ tagName: 'div', className: 'arena___health-bar', attributes: { id: `${position}-fighter-indicator` }});
+  const healthBar = createElement({ tagName: 'div', className: 'arena___health-bar', attributes: { id: `${position}-fighter-indicator` }});
   const barShadow = createElement({ tagName: 'div', className: 'arena___health-bar-shadow', attributes: { id: `${position}-fighter-indicator-shadow` }});
+  const criticalHitIndicator = createElement({ tagName: 'div', className: 'arena___fighter-critical-hit-indicator', attributes: { id: `${position}-fighter-critical-indicator` } });
+  const criticalHitBar = createElement({ tagName: 'div', className: 'arena___fighter-critical-hit-bar', attributes: {name: fighter.name, id: `${position}-fighter-critical-indicator-shadow` } });
 
   fighterName.innerText = name;
-  indicator.append(bar);
+  criticalHitIndicator.append(criticalHitBar);
+  indicator.append(healthBar);
   indicator.append(barShadow);
-  container.append(fighterName, indicator);
+  container.append(fighterName, indicator, criticalHitIndicator);
 
   return container;
 }

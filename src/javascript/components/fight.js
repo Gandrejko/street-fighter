@@ -109,7 +109,16 @@ function checkCriticalHit({ keyCombination, attacker, defender, pressedKeys }) {
   if (attacker.isCritical && rightСombination) {
     defender.health -= getCriticalHit(attacker);
     attacker.isCritical = false;
-    setTimeout(() => attacker.isCritical = true, 10000);
+    const attackerElement = document.querySelector(`[name=${attacker.name}]`);
+    attackerElement.classList.remove('light');
+    attackerElement.style.width = "0";
+    for (let i = 0; i <= 9; i++) {
+      setTimeout(() => attackerElement.style.width = (i + 1) * 10 + '%', i * 1000)
+    }
+    setTimeout(() => {
+      attackerElement.classList.add('light');
+      attacker.isCritical = true
+    }, 10000);
   }
 }
 
