@@ -2,6 +2,7 @@ import { createElement } from '../helpers/domHelper';
 import { createFighterImage } from './fighterPreview';
 import {fight, getDamage} from "./fight";
 import {controls} from "../../constants/controls";
+import {showWinnerModal} from "./modal/winner";
 
 export function renderArena(selectedFighters) {
   const root = document.getElementById('root');
@@ -9,17 +10,15 @@ export function renderArena(selectedFighters) {
   root.innerHTML = '';
   root.append(arena);
 
-  // todo:
-
   fight(...selectedFighters)
-  // - when fight is finished show winner
+      .then(winner => showWinnerModal(winner))
 }
 
 function createArena(selectedFighters) {
   const arena = createElement({ tagName: 'div', className: 'arena___root' });
   const healthIndicators = createHealthIndicators(...selectedFighters);
   const fighters = createFighters(...selectedFighters);
-  
+
   arena.append(healthIndicators, fighters);
   return arena;
 }

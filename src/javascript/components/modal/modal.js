@@ -27,7 +27,7 @@ function createHeader(title, onClose) {
   const titleElement = createElement({ tagName: 'span' });
   const closeButton = createElement({ tagName: 'div', className: 'close-btn' });
   
-  titleElement.innerText = title;
+  titleElement.innerText = "Winner:  " + title;
   closeButton.innerText = '×';
   
   const close = () => {

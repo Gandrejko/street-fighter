@@ -54,6 +54,12 @@ export async function fight(firstFighter, secondFighter) {
       });
 
       updateHealthBar({ leftFighter: playerOne, rightFighter: playerTwo});
+      if (playerOne.health <= 0 || playerTwo.health <= 0) {
+        const winner = playerOne.health <= 0 ? playerTwo : playerOne;
+        const loser = playerOne.health <= 0 ? playerOne : playerTwo;
+        animateWin(winner, loser)
+        setTimeout(() => resolve(winner), 3000)
+      }
     });
 
     window.addEventListener('keyup', (event) => {
@@ -107,6 +113,15 @@ function checkCriticalHit({ keyCombination, attacker, defender, pressedKeys }) {
   }
 }
 
+function animateWin(winner, loser) {
+  const winnerElement = document.querySelector(`[title=${winner.name}]`);
+  const loserElement = document.querySelector(`[title=${loser.name}]`);
+  winnerElement.classList.add('win');
+  setTimeout(() => {
+    loserElement.classList.add('run');
+    winnerElement.classList.add('run');
+  }, 3000)
+}
 
 function getFormatedHealth({ health, maxHealth }) {
   return `${health < 0 ? 0 : (health / maxHealth * 100)}%`;
@@ -114,7 +129,7 @@ function getFormatedHealth({ health, maxHealth }) {
 
 export function getDamage(attacker, defender) {
   const damage = getHitPower(attacker) - getBlockPower(defender);
-  return damage > 0 ? damage : 0;
+  return Math.max(damage, 0);
 }
 
 export function getCriticalHit({ attack }) {
