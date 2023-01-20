@@ -29,6 +29,12 @@
   cursor: pointer;
   font-weight: bold;
   box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.75);
+  transition: 0.3s;
+}
+
+.preview-container___fight-btn:hover {
+  background-color: #7c0101;
+  transform: scale(1.05);
 }
 
 .preview-container___fight-btn.disabled {

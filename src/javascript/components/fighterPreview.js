@@ -7,27 +7,57 @@ export function createFighterPreview(fighter, position) {
     className: `fighter-preview___root ${positionClassName}`,
   });
   const {name, health, attack, defense, source} = fighter;
-  fighterElement.innerHTML = `
-    <div class="fighter-preview__name">${name}</div>
-    <div class="fighter-preview__image">
-        <img src="${source}">
-    </div>
-    <div class="fighter-preview__details">
-        <div class="fighter-preview__detail-title">Health</div>
-        <div class="fighter-preview__health fighter-preview__detail">            
-            <div style="width: ${health / 60 * 100}%" class="fighter-preview__progress"></div>
-        </div>
-        <div class="fighter-preview__detail-title">Attack</div>
-        <div class="fighter-preview__attack fighter-preview__detail">            
-            <div style="width: ${attack / 5 * 100}%" class="fighter-preview__progress"></div>
-        </div>
-        <div class="fighter-preview__detail-title">Defence</div>
-        <div class="fighter-preview__defence fighter-preview__detail">           
-            <div style="width: ${defense / 4 * 100}%" class="fighter-preview__progress"></div>
-        </div>
-    </div>   
-  `;
+  const fighterNameElement = createElement({
+    tagName: 'div',
+    className: 'fighter-preview__name',
+  });
+  fighterNameElement.innerText = name;
+
+  const fighterImageElement = createElement({
+    tagName: 'div',
+    className: 'fighter-preview__image',
+  });
+  fighterImageElement.append(createFighterImage(fighter));
+
+  const fighterDetailsElement = createElement({
+    tagName: 'div',
+    className: 'fighter-preview__details',
+  });
+  fighterDetailsElement.append(
+      createDetailElement(health, 'health'),
+      createDetailElement(attack, 'attack'),
+      createDetailElement(defense, 'defense')
+  )
+
+  fighterElement.append(fighterNameElement, fighterImageElement, fighterDetailsElement);
+
   return fighterElement;
+}
+
+function createDetailElement(ability, abilityName) {
+  const fighterDetailElement = createElement({
+    tagName: 'div',
+    className: `fighter-preview__${abilityName} fighter-preview__detail`,
+  });
+  const fighterDetailProgressElement = createElement({
+    tagName: 'div',
+    className: `fighter-preview__progress`,
+  });
+  let width;
+  if(abilityName === 'health') width = ability / 60 * 100;
+  if(abilityName === 'attack') width = ability / 5 * 100;
+  if(abilityName === 'defense') width = ability / 4 * 100;
+  fighterDetailProgressElement.style.width = width + '%';
+
+  const fighterDetailTitleElement = createElement({
+    tagName: 'div',
+    className: `fighter-preview__detail-title`,
+  });
+  fighterDetailTitleElement.innerHTML = abilityName;
+
+  fighterDetailElement.append(fighterDetailProgressElement, fighterDetailTitleElement);
+
+  return fighterDetailElement;
 }
 
 export function createFighterImage(fighter) {

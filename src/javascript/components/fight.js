@@ -1,5 +1,4 @@
 import { controls } from '../../constants/controls';
-import {showWinnerModal} from "./modal/winner";
 
 export async function fight(firstFighter, secondFighter) {
   return new Promise((resolve) => {
