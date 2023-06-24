@@ -1,6 +1,8 @@
-import {showModal} from "./modal";
-import {createFighterImage} from "../fighterPreview";
+import showModal from './modal';
+import { createFighterImage } from '../fighterPreview';
 
-export function showWinnerModal(fighter) {
-  showModal({title: fighter.name, bodyElement: createFighterImage(fighter)})
+function showWinnerModal(fighter) {
+    showModal({ title: fighter.name, bodyElement: createFighterImage(fighter) });
 }
+
+export default showWinnerModal;
